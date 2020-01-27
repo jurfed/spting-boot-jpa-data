@@ -1,5 +1,8 @@
 package ru.jurfed.sptingdatajpa.repositories;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.jurfed.sptingdatajpa.domain.Person;
@@ -11,5 +14,9 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 
     List<Person> findAll();
 
+    List<Person> findAll(Sort sort);
+
     Person findByName(String name);
+
+    Page<Person> findAll(Pageable pageable);
 }
