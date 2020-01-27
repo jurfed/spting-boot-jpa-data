@@ -29,8 +29,8 @@ class SptingDataJpaApplicationTests {
 //	@Autowired
 	@Test
 	void contextLoads() {
-		this.testEntityManager.merge(new Person(1,"Vasiliy"));
-		Person person = this.personRepository.findByName("Vasiliy");
+		this.testEntityManager.merge(new Person(1,"Vasiliy", "Ivanov"));
+		Person person = this.personRepository.findBySurname("Ivanov");
 		assertThat(person.getName()).isEqualTo("Vasiliy");
 		System.out.println();
 	}

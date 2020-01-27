@@ -23,20 +23,20 @@ public class SptingDataJpaApplication {
         PersonRepository repository = (PersonRepository) context.getBean("person");
 
 		System.err.println("\nall finded persons");
-        repository.save(new Person("Pushkin"));
-        repository.save(new Person("Ivanova"));
+        repository.save(new Person("Ivan", "Pushkin"));
+        repository.save(new Person("Elena","Ivanova"));
         List<Person> personList = repository.findAll();
         personList.forEach(person -> System.err.println(person));
 
 		System.err.println("\nfind person by name");
-        repository.save(new Person("Petrov"));
-        repository.save(new Person("Sidorov"));
-        Person findedPerson = repository.findByName("Petrov");
+        repository.save(new Person("Pavel","Petrov"));
+        repository.save(new Person("Kostya","Sidorov"));
+        Person findedPerson = repository.findBySurname("Petrov");
         System.err.println(findedPerson);
 
 		System.err.println("\nsorted persons:");
-		repository.save(new Person("Zvezdnayz"));
-		repository.save(new Person("Abramov"));
+		repository.save(new Person("Mariya","Zvezdnay"));
+		repository.save(new Person("Iliya","Abramov"));
         List<Person> sortedPerson = repository.findAll(Sort.by(Sort.Direction.ASC, "name", "id"));
         sortedPerson.forEach(person -> System.err.println(person));
 
@@ -45,6 +45,8 @@ public class SptingDataJpaApplication {
 		pageablePersons.forEach(person -> System.err.println(person));
 
 		System.err.println("\nQuery:");
+		Person person = repository.customFind("Petrov");
+        System.err.println(person);
     }
 
 }
