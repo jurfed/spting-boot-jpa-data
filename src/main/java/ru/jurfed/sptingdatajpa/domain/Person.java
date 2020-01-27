@@ -21,7 +21,6 @@ public class Person {
         this.name = name;
         this.surname = surname;
     }
-
     @Id
     @GeneratedValue
     private int id;
