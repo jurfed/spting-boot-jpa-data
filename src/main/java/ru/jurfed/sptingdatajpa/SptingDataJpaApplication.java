@@ -23,6 +23,7 @@ public class SptingDataJpaApplication {
         ApplicationContext context = SpringApplication.run(SptingDataJpaApplication.class, args);
         PersonServiceImpl personService = context.getBean(PersonServiceImpl.class);
         personService.simpleTests();
+        personService.simpleTests2();
 //        PersonRepository repository = (PersonRepository) context.getBean("person");
 
 

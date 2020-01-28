@@ -7,8 +7,15 @@ import javax.persistence.*;
 @Table(name = "Address")
 public class Address {
 
+    public Address() {
+    }
+
+    public Address(String address) {
+        this.address = address;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "addr_id")
     private int id;
 

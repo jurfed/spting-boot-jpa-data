@@ -7,18 +7,25 @@ import java.util.Objects;
 @Table(name = "Person")
 public class Person {
 
-    public Person() {
+    public Person(String name, String surname, Address address) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
     }
 
     public Person(int id, String name, String surname) {
         this.id = id;
-        this.name = name;
         this.surname = surname;
+        this.address = address;
     }
+
 
     public Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
+    }
+
+    public Person() {
     }
 
     @Id
@@ -33,8 +40,8 @@ public class Person {
     private String surname;
 
 
-    @OneToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "person_id", referencedColumnName = "addr_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "addressid", referencedColumnName = "addr_id")
     private Address address;
 
     public Person(String name) {

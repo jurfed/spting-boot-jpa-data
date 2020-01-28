@@ -5,7 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.jurfed.sptingdatajpa.domain.Address;
 import ru.jurfed.sptingdatajpa.domain.Person;
+import ru.jurfed.sptingdatajpa.repositories.AddressRepository;
 import ru.jurfed.sptingdatajpa.repositories.PersonRepository;
 
 import java.util.ArrayList;
@@ -17,6 +20,9 @@ public class PersonServiceImpl implements PersonService{
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    AddressRepository addressRepository;
 
     @Override
     public void simpleTests() {
@@ -68,5 +74,19 @@ public class PersonServiceImpl implements PersonService{
         System.err.println("\n------------------------------Custom method------------------------------");
         Person person1 = personRepository.findPersonByMaxId();
         System.err.println(person1);
+    }
+
+    @Override
+    @Transactional
+    public void simpleTests2() {
+        Address address = new Address("Obuhova oborona 26");
+        Address address2 = new Address("Petrovskaya 76");
+//        addressRepository.save(address);
+        Person person = new Person("Kuzya", "Ruzymin", address);
+        Person person2 = new Person("New person", "New surname", address2);
+        personRepository.save(person);
+        personRepository.save(person2);
+
+
     }
 }
