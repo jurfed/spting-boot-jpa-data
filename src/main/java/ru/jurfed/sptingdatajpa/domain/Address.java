@@ -2,6 +2,7 @@ package ru.jurfed.sptingdatajpa.domain;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "Address")
 @Table(name = "Address")
@@ -31,6 +32,24 @@ public class Address {
         this.address = address;
     }
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address1 = (Address) o;
+        return Objects.equals(address, address1.address);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(address);
+    }
 }

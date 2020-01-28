@@ -1,6 +1,8 @@
 package ru.jurfed.sptingdatajpa.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Person")
@@ -44,6 +46,13 @@ public class Person {
     @JoinColumn(name = "addressid", referencedColumnName = "addr_id")
     private Address address;
 
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = false, fetch = FetchType.EAGER
+    )
+    @JoinColumn(name = "mail_person", referencedColumnName = "person_id")
+    private List<Email> emails = new ArrayList<>();
+
     public Person(String name) {
         this.name = name;
     }
@@ -80,6 +89,14 @@ public class Person {
         this.address = address;
     }
 
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -87,6 +104,7 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", address=" + address +
+                ", emails=" + emails +
                 '}';
     }
 

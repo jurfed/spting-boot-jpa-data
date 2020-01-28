@@ -17,6 +17,6 @@ addressid int references Address(addr_id) ON DELETE CASCADE null
 create table email(
     mail_id serial primary key,
     mail_name varchar(255),
-    mail_person int references Person(person_id)  ON DELETE CASCADE null
+    mail_person int references Person(person_id)  ON DELETE CASCADE
 );
 
