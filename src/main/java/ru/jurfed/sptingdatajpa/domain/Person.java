@@ -1,11 +1,10 @@
 package ru.jurfed.sptingdatajpa.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "Person")
+@Table(name = "Person")
 public class Person {
 
     public Person() {
@@ -21,11 +20,22 @@ public class Person {
         this.name = name;
         this.surname = surname;
     }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id")
     private int id;
+
+    @Column(name = "person_name")
     private String name;
+
+    @Column(name = "person_surname")
     private String surname;
+
+
+    @OneToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "person_id", referencedColumnName = "addr_id")
+    private Address address;
 
     public Person(String name) {
         this.name = name;
@@ -55,15 +65,23 @@ public class Person {
         this.surname = surname;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", address=" + address +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -71,11 +89,12 @@ public class Person {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return Objects.equals(name, person.name) &&
-                Objects.equals(surname, person.surname);
+                Objects.equals(surname, person.surname) &&
+                Objects.equals(address, person.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname);
+        return Objects.hash(name, surname, address);
     }
 }
