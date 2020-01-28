@@ -11,7 +11,7 @@ import ru.jurfed.sptingdatajpa.domain.Person;
 import java.util.List;
 
 @Repository("person")
-public interface PersonRepository extends CrudRepository<Person, Integer> {
+public interface PersonRepository extends CrudRepository<Person, Integer>, CustomizedPerson {
 
     List<Person> findAll();
 
@@ -23,5 +23,6 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 
     @Query("select p from Person p where p.surname =:n")
     Person customFind(String n);
+
 
 }
