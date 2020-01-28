@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.jurfed.sptingdatajpa.domain.Person;
 
@@ -21,8 +22,8 @@ public interface PersonRepository extends CrudRepository<Person, Integer>, Custo
 
     Page<Person> findAll(Pageable pageable);
 
-    @Query("select p from Person p where p.surname =:n")
-    Person customFind(String n);
+    @Query("select p from Person p where p.surname =:surname")
+    Person customFind(@Param("surname") String n);
 
 
 }
