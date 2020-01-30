@@ -3,8 +3,10 @@ package ru.jurfed.sptingdatajpa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import ru.jurfed.sptingdatajpa.service.PersonServiceImpl;
 
+@EnableJpaRepositories(basePackages = "ru.jurfed.sptingdatajpa")//write this in the Configuration class
 @SpringBootApplication
 public class SptingDataJpaApplication {
 
