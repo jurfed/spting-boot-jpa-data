@@ -13,7 +13,7 @@ import ru.jurfed.sptingdatajpa.domain.Person;
 import java.util.List;
 
 @Repository("address")
-public interface AddressRepository extends CrudRepository<Address, Integer>, CustomizedPerson {
+public interface AddressRepository extends CrudRepository<Address, Integer> {
 
     List<Address> findAll();
 
