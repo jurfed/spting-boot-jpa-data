@@ -23,6 +23,8 @@ public class Address {
     @Column(name = "street")
     private String address;
 
+    @OneToOne(mappedBy = "address")
+    private Person person;
 
     public String getAddress() {
         return address;

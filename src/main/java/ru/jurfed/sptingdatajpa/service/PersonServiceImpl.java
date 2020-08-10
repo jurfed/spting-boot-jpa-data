@@ -6,9 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.jurfed.sptingdatajpa.domain.Address;
-import ru.jurfed.sptingdatajpa.domain.Email;
-import ru.jurfed.sptingdatajpa.domain.Person;
+import ru.jurfed.sptingdatajpa.domain.*;
 import ru.jurfed.sptingdatajpa.repositories.AddressRepository;
 import ru.jurfed.sptingdatajpa.repositories.PersonRepository;
 
@@ -25,13 +23,14 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     AddressRepository addressRepository;
 
+
     @Override
     public void simpleTests() {
         System.err.println("\n------------------------------all finded persons------------------------------");
         personRepository.saveAndFlush(new Person("Ivan", "Pushkin"));
         personRepository.saveAndFlush(new Person("Elena", "Ivanova"));
         List<Person> personList = personRepository.findAll();
-        personList.forEach(person -> System.err.println(person));
+        personList.forEach(System.err::println);
 
         System.err.println("\n------------------------------find person by name------------------------------");
         personRepository.saveAndFlush(new Person("Pavel", "Petrov"));
@@ -52,7 +51,7 @@ public class PersonServiceImpl implements PersonService {
 
         System.err.println("\n------------------------------Save all------------------------------");
         Person p1 = new Person("Name 1", "Surname 1");
-        Person p2 = new Person("Name 2", "Surname 2");
+        Person p2 = new Person("Name 1", "Surname 2");
         Person p3 = new Person("Name 3", "Surname 3");
         Person p4 = new Person("Name 4", "Surname 4");
 
@@ -75,6 +74,14 @@ public class PersonServiceImpl implements PersonService {
         System.err.println("\n------------------------------Custom method------------------------------");
         Person person1 = personRepository.findPersonByMaxId();
         System.err.println(person1);
+
+        System.err.println("\n------------------------------Native query group by------------------------------");
+        System.err.println("\n example 1 --------------");
+        personRepository.saveAll(personList1);
+        List<Object[]> personsGroup = personRepository.findByNameAndGroup();
+        personsGroup.forEach(objects -> System.err.println(objects[0] + " " + objects[1]));
+
+
     }
 
     @Override
@@ -154,6 +161,5 @@ public class PersonServiceImpl implements PersonService {
 
 
     }
-
 
 }

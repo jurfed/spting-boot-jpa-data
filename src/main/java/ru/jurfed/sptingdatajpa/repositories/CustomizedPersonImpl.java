@@ -1,10 +1,12 @@
 package ru.jurfed.sptingdatajpa.repositories;
 
 import ru.jurfed.sptingdatajpa.domain.Person;
+import ru.jurfed.sptingdatajpa.domain.PersonAndGroup;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 public class CustomizedPersonImpl implements CustomizedPerson{
 
@@ -17,4 +19,6 @@ public class CustomizedPersonImpl implements CustomizedPerson{
         Person person = (Person) result.getSingleResult();
         return person;
     }
+
+
 }

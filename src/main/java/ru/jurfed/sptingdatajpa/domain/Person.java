@@ -47,8 +47,7 @@ public class Person {
     private Address address;
 
     @OneToMany(
-            cascade = {CascadeType.ALL},
-            orphanRemoval = false, fetch = FetchType.EAGER
+            cascade = {CascadeType.ALL}, fetch = FetchType.EAGER
     )
     @JoinColumn(name = "mail_person", referencedColumnName = "person_id")
     private List<Email> emails = new ArrayList<>();
